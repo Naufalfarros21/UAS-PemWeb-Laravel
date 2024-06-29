@@ -67,7 +67,9 @@ class LoginController extends Controller
 
         $token = \Str::random(60);
 
-        PasswordResetToken::updateOrCreate(
+        \Log::info('Email untuk penyimpanan token: ' . $request->email);
+
+        $passwordReset = PasswordResetToken::updateOrCreate(
             [
                 'email' => $request->email
             ],
@@ -78,10 +80,15 @@ class LoginController extends Controller
             ]
         );
 
+        \Log::info('Token reset password disimpan untuk email: ' . $passwordReset->email);
+        \Log::info('Data disimpan: ' . json_encode($passwordReset));
+
         Mail::to($request->email)->send(new ResetPasswordMail($token));
 
         return redirect()->route('login')->with('success', 'Kami telah mengirimkan link reset password ke email anda');
     }
+
+
 
     public function validasi_forgot_password_act(Request $request)
     {
@@ -94,15 +101,19 @@ class LoginController extends Controller
             'password' => 'required|min:6'
         ], $customMessage);
 
-        $token = PasswordResetToken::where('token', $request->token)->first();
+        $tokenData = PasswordResetToken::where('token', $request->token)->first();
 
-        if (!$token) {
+        if (!$tokenData) {
+            \Log::error('Token tidak valid: ' . $request->token);
             return redirect()->route('login')->with('failed', 'Token tidak valid');
         }
 
-        $user = User::where('email', $token->email)->first();
+        \Log::info('Token ditemukan untuk validasi: ' . $tokenData->token . ' dengan email: ' . $tokenData->email);
+
+        $user = User::where('email', $tokenData->email)->first();
 
         if (!$user) {
+            \Log::error('Email tidak terdaftar di database: ' . $tokenData->email);
             return redirect()->route('login')->with('failed', 'Email tidak terdaftar di database');
         }
 
@@ -110,21 +121,29 @@ class LoginController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        $token->delete();
+        \Log::info('Password berhasil direset untuk email: ' . $user->email);
+
+        $tokenData->delete();
 
         return redirect()->route('login')->with('success', 'Password berhasil direset');
     }
 
+
+
     public function validasi_forgot_password(Request $request, $token)
     {
-        $getToken = PasswordResetToken::where('token', $token)->first();
+        $tokenData = PasswordResetToken::where('token', $token)->first();
 
-        if (!$getToken) {
+        if (!$tokenData) {
+            \Log::error('Token tidak valid: ' . $token);
             return redirect()->route('login')->with('failed', 'Token tidak valid');
         }
 
+        \Log::info('Token ditemukan untuk validasi: ' . $token . ' dengan email: ' . $tokenData->email);
+
         return view('auth.validasi-token', compact('token'));
     }
+
 
     public function register()
     {

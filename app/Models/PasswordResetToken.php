@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class PasswordResetToken extends Model
 {
     use HasFactory;
+
     protected $table = 'password_reset_tokens';
     protected $primaryKey = 'email';
-
+    public $incrementing = false;
     public $timestamps = false;
 
-    protected $fillable = [
-        'email',
-        'token',
-        'created_at',
+    protected $fillable = ['email', 'token', 'created_at'];
+    protected $casts = [
+        'email' => 'string',
     ];
 }
