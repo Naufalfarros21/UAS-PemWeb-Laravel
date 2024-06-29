@@ -144,6 +144,7 @@
                                 <thead>
                                     <tr>
                                         <th>Alternatif</th>
+                                        <th>Keterangan</th>
                                         <th>Nilai Preferensi</th>
                                     </tr>
                                 </thead>
@@ -151,6 +152,7 @@
                                     @foreach($preferences as $i => $preference)
                                     <tr>
                                         <td>{{ $alternatifs[$i]->name }}</td>
+                                        <td>{{ $alternatifs[$i]->keterangan }}</td>
                                         <td>{{ number_format($preference, 4) }}</td>
                                     </tr>
                                     @endforeach
@@ -170,6 +172,7 @@
                                     <tr>
                                         <th>Ranking</th>
                                         <th>Alternatif</th>
+                                        <th>Keterangan</th>
                                         <th>Nilai Preferensi</th>
                                     </tr>
                                 </thead>
@@ -178,6 +181,7 @@
                                     <tr>
                                         <td>{{ $rank + 1 }}</td>
                                         <td>{{ $alternatifs[$i]->name }}</td>
+                                        <td>{{ $alternatifs[$i]->keterangan }}</td>
                                         <td>{{ number_format($preferences[$i], 4) }}</td>
                                     </tr>
                                     @endforeach
