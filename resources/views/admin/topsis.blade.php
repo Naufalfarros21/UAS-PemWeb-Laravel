@@ -22,6 +22,9 @@
                             <h3 class="card-title">Matriks Normalisasi</h3>
                         </div>
                         <div class="card-body">
+                            <p>Nilai-nilai dalam tabel ini adalah hasil dari normalisasi matriks keputusan awal, di mana
+                                setiap nilai dalam matriks awal dibagi dengan akar kuadrat dari jumlah kuadrat seluruh
+                                nilai dalam kolom tersebut.</p>
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -51,6 +54,8 @@
                             <h3 class="card-title">Matriks Terbobot</h3>
                         </div>
                         <div class="card-body">
+                            <p>Nilai-nilai dalam tabel ini adalah hasil dari normalisasi terbobot, di mana setiap nilai
+                                normalisasi dikalikan dengan bobot kriteria terkait.</p>
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -80,6 +85,9 @@
                             <h3 class="card-title">Solusi Ideal</h3>
                         </div>
                         <div class="card-body">
+                            <p>Solusi ideal positif (terbaik) dan negatif (terburuk) dihitung berdasarkan nilai maksimal
+                                dan minimal dari setiap kolom matriks terbobot, tergantung apakah kriteria tersebut
+                                bertipe benefit atau cost.</p>
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -113,6 +121,8 @@
                             <h3 class="card-title">Jarak Solusi Ideal</h3>
                         </div>
                         <div class="card-body">
+                            <p>Jarak solusi ideal dihitung menggunakan rumus Euclidean distance antara setiap alternatif
+                                dengan solusi ideal positif dan negatif.</p>
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -140,6 +150,8 @@
                             <h3 class="card-title">Nilai Preferensi</h3>
                         </div>
                         <div class="card-body">
+                            <p>Nilai preferensi dihitung berdasarkan jarak ke solusi ideal positif dan negatif. Semakin
+                                tinggi nilai preferensi, semakin baik alternatif tersebut.</p>
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -167,6 +179,7 @@
                             <h3 class="card-title">Ranking</h3>
                         </div>
                         <div class="card-body">
+                            <p>Ranking ditentukan berdasarkan nilai preferensi dari tertinggi ke terendah.</p>
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -183,6 +196,31 @@
                                         <td>{{ $alternatifs[$i]->name }}</td>
                                         <td>{{ $alternatifs[$i]->keterangan }}</td>
                                         <td>{{ number_format($preferences[$i], 4) }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Keterangan Alternatif -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Keterangan Alternatif</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Alternatif</th>
+                                        <th>Keterangan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($alternatifs as $alternatif)
+                                    <tr>
+                                        <td>{{ $alternatif->name }}</td>
+                                        <td>{{ $alternatif->keterangan }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

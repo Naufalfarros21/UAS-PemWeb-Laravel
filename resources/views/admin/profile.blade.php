@@ -31,20 +31,16 @@
                         <div class="card-body box-profile">
                             <div class="text-center">
                                 @if($user->image)
-                                <img class="profile-user-img img-fluid img-circle"
-                                    src="{{ Storage::url('profile_pictures/' . $user->image) }}"
-                                    alt="Foto profil pengguna">
+                                <img class="profile-user-img img-fluid img-circle" src="{{ Storage::url('profile_pictures/' . $user->image) }}" alt="Foto profil pengguna">
                                 @else
-                                <img class="profile-user-img img-fluid img-circle"
-                                    src="{{ asset('asset/profile-user.png') }}" alt="Ikon pengguna default">
+                                <img class="profile-user-img img-fluid img-circle" src="{{ asset('asset/profile-user.png') }}" alt="Ikon pengguna default">
                                 @endif
                             </div>
 
                             <h3 class="profile-username text-center">{{ $user->name }}</h3>
                             <div class="text-center mt-3">
                                 <!-- Form untuk mengupload foto profil -->
-                                <form action="{{ route('admin.profile.update') }}" method="POST"
-                                    enctype="multipart/form-data">
+                                <form action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <input type="file" name="profile_picture" class="form-control mb-2">
                                     <button type="submit" class="btn btn-primary btn-block">Ubah Foto Profil</button>
@@ -74,8 +70,7 @@
                                 <div class="form-group row">
                                     <label for="inputName" class="col-sm-2 col-form-label">Nama</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="inputName" placeholder="Nama"
-                                            value="{{ $user->name }}" readonly>
+                                        <input type="text" class="form-control" id="inputName" placeholder="Nama" value="{{ $user->name }}" readonly>
                                     </div>
                                     <div class="col-sm-1">
                                         <a href="#" class="btn btn-tool"><i class="fas fa-edit"></i></a>
@@ -84,8 +79,7 @@
                                 <div class="form-group row">
                                     <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                                     <div class="col-sm-9">
-                                        <input type="email" class="form-control" id="inputEmail" placeholder="Email"
-                                            value="{{ $user->email }}" readonly>
+                                        <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="{{ $user->email }}" readonly>
                                     </div>
                                     <div class="col-sm-1">
                                         <a href="#" class="btn btn-tool"><i class="fas fa-edit"></i></a>
@@ -94,12 +88,10 @@
                                 <div class="form-group row">
                                     <label for="inputPassword" class="col-sm-2 col-form-label">Ubah Password</label>
                                     <div class="col-sm-9">
-                                        <input type="password" class="form-control" id="inputPassword"
-                                            placeholder="Password" readonly>
+                                        <input type="password" class="form-control" id="inputPassword" placeholder="Password" readonly>
                                     </div>
                                     <div class="col-sm-1">
-                                        <a href="#" class="btn btn-tool" data-toggle="modal"
-                                            data-target="#changePasswordModal"><i class="fas fa-edit"></i></a>
+                                        <a href="#" class="btn btn-tool" data-toggle="modal" data-target="#changePasswordModal"><i class="fas fa-edit"></i></a>
                                     </div>
                                 </div>
                             </form>
@@ -117,8 +109,7 @@
 </div>
 
 <!-- Modal Ubah Password -->
-<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -132,17 +123,11 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="current_password">Password Lama</label>
-                        <input type="password" class="form-control" id="current_password" name="current_password"
-                            required>
+                        <input type="password" class="form-control" id="current_password" name="current_password" required>
                     </div>
                     <div class="form-group">
                         <label for="new_password">Password Baru</label>
                         <input type="password" class="form-control" id="new_password" name="new_password" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="confirm_password">Konfirmasi Password Baru</label>
-                        <input type="password" class="form-control" id="confirm_password" name="confirm_password"
-                            required>
                     </div>
                 </div>
                 <div class="modal-footer">

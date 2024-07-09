@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kriteria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class KriteriaController extends Controller
 {
@@ -21,7 +22,7 @@ class KriteriaController extends Controller
             'kode' => 'required',
             'keterangan' => 'required',
             'bobot' => ['required', 'numeric', 'max:5'],
-            'tipe' => ['required', \Rule::in(['benefit', 'cost'])],
+            'tipe' => ['required', Rule::in(['benefit', 'cost'])],
         ]);
 
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
@@ -39,7 +40,7 @@ class KriteriaController extends Controller
             'kode' => 'required',
             'keterangan' => 'nullable',
             'bobot' => ['required', 'numeric', 'max:5'],
-            'tipe' => ['required', \Rule::in(['benefit', 'cost'])],
+            'tipe' => ['required', Rule::in(['benefit', 'cost'])],
         ]);
 
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);

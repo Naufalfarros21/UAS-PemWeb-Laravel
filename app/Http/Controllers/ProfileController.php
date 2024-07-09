@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -15,12 +15,11 @@ class ProfileController extends Controller
         return view('admin.profile', compact('user'));
     }
 
-
     public function changePassword(Request $request)
     {
         $request->validate([
             'current_password' => 'required',
-            'new_password' => 'required|min:8|confirmed',
+            'new_password' => 'required|min:8',
         ]);
 
         $user = Auth::user();
@@ -36,8 +35,6 @@ class ProfileController extends Controller
 
         return redirect()->back()->with('success', 'Password berhasil diubah.');
     }
-
-
 
     public function updateProfilePicture(Request $request)
     {
